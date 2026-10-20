@@ -1,0 +1,58 @@
+{
+  "manifest_version": 3,
+  "name": "Diacritice Automate Românești",
+  "version": "1.1.1",
+  "description": "Adaugă diacritice automat în timp ce scrii în limba română pe orice site web (WhatsApp Web, Gmail, Facebook, forumuri, formulare etc.).",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "contextMenus",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "32": "icon32.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    },
+    "default_title": "Diacritice Automate Românești"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "dict.js",
+        "rules.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "toggle-diacritics": {
+      "suggested_key": {
+        "default": "Alt+D"
+      },
+      "description": "Adaugă diacritice la textul selectat sau din câmpul activ"
+    }
+  }
+}

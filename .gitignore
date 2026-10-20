@@ -1,0 +1,10 @@
+# Python scripts used during build
+build_dict.py
+generate_assets.py
+generate_icons.py
+__pycache__/
+*.pyc
+
+# OS files
+Thumbs.db
+.DS_Store

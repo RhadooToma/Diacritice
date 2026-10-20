@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diacritice</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Top Bar -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-glyph">
+          <span class="glyph-char">ă</span>
+          <span class="glyph-dot"></span>
+        </div>
+        <div class="brand-info">
+          <div class="brand-title-row">
+            <h1 class="brand-title">Diacritice</h1>
+            <span class="version-tag">1.1</span>
+          </div>
+          <div class="status-indicator-wrap">
+            <span class="live-dot" id="status-dot"></span>
+            <span class="live-text" id="status-text">Activ</span>
+            <span class="counter-badge" id="words-counter">0 cuvinte</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-action">
+        <label class="ios-switch" title="Activează / Pauză">
+          <input type="checkbox" id="master-toggle" checked>
+          <span class="ios-slider"></span>
+        </label>
+      </div>
+    </header>
+
+    <!-- Segmented Navigation Bar -->
+    <nav class="nav-segment">
+      <button class="nav-btn active" data-tab="tab-options">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line>
+          <line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line>
+          <line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line>
+          <line x1="17" y1="16" x2="23" y2="16"></line>
+        </svg>
+        <span>Setări</span>
+      </button>
+      <button class="nav-btn" data-tab="tab-custom">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+        </svg>
+        <span>Dicționar</span>
+      </button>
+      <button class="nav-btn" data-tab="tab-ai">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+        </svg>
+        <span>AI</span>
+      </button>
+      <button class="nav-btn" data-tab="tab-sites">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        <span>Site-uri</span>
+      </button>
+    </nav>
+
+    <!-- CONTENT AREAS -->
+    <main class="app-body">
+      <!-- TAB 1: General Options -->
+      <section class="tab-pane active" id="tab-options">
+        <div class="control-group">
+          <div class="row-item">
+            <div class="row-info">
+              <span class="row-title">Auto-completare la tastare</span>
+              <span class="row-desc">Adaugă diacritice automat după tasta Spațiu</span>
+            </div>
+            <label class="micro-switch">
+              <input type="checkbox" id="opt-auto-mode" checked>
+              <span class="micro-slider"></span>
+            </label>
+          </div>
+
+          <div class="row-item">
+            <div class="row-info">
+              <span class="row-title">Detecție automată limbă</span>
+              <span class="row-desc">Păstrează cuvintele în engleză intacte (ex: in, is, to)</span>
+            </div>
+            <label class="micro-switch">
+              <input type="checkbox" id="opt-detect-language" checked>
+              <span class="micro-slider"></span>
+            </label>
+          </div>
+
+          <div class="row-item">
+            <div class="row-info">
+              <span class="row-title">Meniu plutitor la selecție</span>
+              <span class="row-desc">Bară contextuală rapidă când selectezi text cu mouse-ul</span>
+            </div>
+            <label class="micro-switch">
+              <input type="checkbox" id="opt-selection-menu" checked>
+              <span class="micro-slider"></span>
+            </label>
+          </div>
+
+          <div class="row-item">
+            <div class="row-info">
+              <span class="row-title">Rafinare propoziție</span>
+              <span class="row-desc">Disambiguizează gramatical (știu că, în față, să fii)</span>
+            </div>
+            <label class="micro-switch">
+              <input type="checkbox" id="opt-sentence-mode" checked>
+              <span class="micro-slider"></span>
+            </label>
+          </div>
+
+          <div class="row-item">
+            <div class="row-info">
+              <span class="row-title">Indicator pe căsuțe de text</span>
+              <span class="row-desc">Insignă discretă în colțul formularelor active</span>
+            </div>
+            <label class="micro-switch">
+              <input type="checkbox" id="opt-floating-btn" checked>
+              <span class="micro-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Testing Console -->
+        <div class="sandbox-card">
+          <div class="sandbox-head">
+            <span class="sandbox-label">Zonă de testare</span>
+            <div class="sandbox-actions">
+              <button id="btn-test-convert" class="action-pill active" title="Adaugă diacritice">+ Diacritice</button>
+              <button id="btn-test-strip" class="action-pill" title="Elimină diacritice">- Diacritice</button>
+            </div>
+          </div>
+          <textarea id="test-textarea" placeholder="Tastează aici de probă (ex: 'cand mergi la scoala si inveti')..." rows="2"></textarea>
+        </div>
+      </section>
+
+      <!-- TAB 2: Custom Exceptions Dictionary -->
+      <section class="tab-pane" id="tab-custom">
+        <div class="pane-header">
+          <h2 class="pane-title">Excepții & Termeni proprii</h2>
+          <p class="pane-desc">Cuvinte care nu vor fi niciodată modificate de extensie.</p>
+        </div>
+
+        <div class="input-action-bar">
+          <div class="input-wrapper">
+            <svg class="input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+            <input type="text" id="input-new-word" placeholder="Adaugă cuvânt (ex: Alex, PR, Docker)...">
+          </div>
+          <button id="btn-add-word" class="btn-solid">Adaugă</button>
+        </div>
+
+        <div class="tag-cloud" id="custom-words-list">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- TAB 3: Gemini AI -->
+      <section class="tab-pane" id="tab-ai">
+        <div class="ai-hero-card">
+          <div class="ai-hero-top">
+            <div class="ai-model-tag">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>
+              <span>Gemini 2.5 Flash</span>
+            </div>
+            <span class="ai-chip" id="ai-status-indicator">Inactiv</span>
+          </div>
+          <p class="ai-hero-desc">
+            Rezolvă nuanțe gramaticale complexe la nivel de paragraf folosind inteligență artificială.
+          </p>
+        </div>
+
+        <div class="field-block">
+          <label for="input-api-key" class="label-text">Cheie API Google AI:</label>
+          <div class="input-wrapper">
+            <input type="password" id="input-api-key" placeholder="AIzaSy..." spellcheck="false">
+          </div>
+          <div class="field-footnote">
+            Cheie gratuită disponibilă pe <a href="https://aistudio.google.com/app/apikey" target="_blank" class="subtle-link">Google AI Studio</a>.
+          </div>
+        </div>
+
+        <div class="dual-actions">
+          <button id="btn-save-ai" class="btn-solid primary">Salvează cheia</button>
+          <button id="btn-test-ai" class="btn-solid outline">Verifică conexiunea</button>
+        </div>
+
+        <div id="ai-test-result" class="feedback-card" style="display:none"></div>
+      </section>
+
+      <!-- TAB 4: Excluded Sites -->
+      <section class="tab-pane" id="tab-sites">
+        <div class="pane-header flex-between">
+          <div>
+            <h2 class="pane-title">Site-uri excluse</h2>
+            <p class="pane-desc">Extensia rămâne oprită pe aceste domenii.</p>
+          </div>
+          <button id="btn-exclude-current" class="action-pill">+ Site curent</button>
+        </div>
+
+        <div class="tag-cloud" id="excluded-list">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Utility Bar -->
+    <footer class="app-footer">
+      <div class="shortcut-legend">
+        <span class="kbd-label">Comandă rapidă</span>
+        <kbd class="key">Alt</kbd><span class="kbd-plus">+</span><kbd class="key">D</kbd>
+      </div>
+      <div class="standard-spec">
+        Standard ISO: <strong>ș, ț</strong>
+      </div>
+    </footer>
+  </div>
+
+  <script src="dict.js"></script>
+  <script src="rules.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
