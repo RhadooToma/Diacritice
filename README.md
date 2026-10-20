@@ -17,7 +17,7 @@
   </p>
 
   <p align="center">
-    <a href="https://alexandru-radutoma.github.io/diacritice/"><strong>🌐 Deschide Website-ul Live Demo (GitHub Pages) »</strong></a>
+    <a href="https://alycubaws.github.io/diacritice/"><strong>🌐 Deschide Website-ul Live Demo (GitHub Pages) »</strong></a>
   </p>
 
 </div>
@@ -78,7 +78,7 @@ Extensia poate fi adăugată direct pe profilul tău de Google Chrome fără a f
 
 1. Descarcă sau clonează acest depozit:
    ```bash
-   git clone https://github.com/alexandru-radutoma/diacritice.git
+   git clone https://github.com/AlycuBAWS/diacritice.git
    ```
    *(Sau descarcă arhiva ZIP și dezarhivează dosarul).*
 2. Deschide **Google Chrome** și accesează în bara de adrese:
